@@ -166,6 +166,7 @@ function textoPorcentaje(valor) {
 
 function tablaTerreno(d) {
     return `
+    <div class="desliza">
     <div class="tabla-ficha tabla-ficha--terreno">
       <span class="tabla-tipos__cabecera">Terreno</span>
       <span class="tabla-tipos__cabecera">Vida</span>
@@ -186,6 +187,7 @@ function tablaTerreno(d) {
           <span class="${clasePorcentaje(x.velocidad)}">${textoPorcentaje(x.velocidad)}</span>
           <span class="${clasePorcentaje(x.fuerza)}">${textoPorcentaje(x.fuerza)}</span>`;
     }).join("")}
+    </div>
     </div>`;
 }
 
@@ -193,7 +195,8 @@ function tablaTerreno(d) {
 function tablaEvolucion(u, niveles) {
     const e = estado.unidades;
     return `
-    <div class="tabla-ficha tabla-ficha--evolucion">
+    <div class="desliza">
+    <div class="tabla-ficha tabla-ficha--terreno">
       <span class="tabla-tipos__cabecera">Nivel</span>
       <span class="tabla-tipos__cabecera">Vida</span>
       <span class="tabla-tipos__cabecera">Velocidad</span>
@@ -214,6 +217,7 @@ function tablaEvolucion(u, niveles) {
           <span class="${actual}">${formatearNumero(d.ataque[mejor.clave] ?? 0)} <small>vs ${mejor.etiqueta.toLowerCase()}</small></span>
           <span class="${actual}">${formatearNumero(costeTotal)}</span>`;
     }).join("")}
+    </div>
     </div>`;
 }
 
@@ -239,6 +243,8 @@ document.addEventListener("click", (evento) => {
         e.unidad = unidad.dataset.uniUnidad;
         e.nivel = 1;
         pintar();
+        // En el móvil la ficha queda debajo de la lista: bajamos hasta ella
+        if (window.innerWidth < 900) uni.ficha.scrollIntoView({ behavior: "smooth", block: "start" });
         return;
     }
 
