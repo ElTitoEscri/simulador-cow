@@ -1,0 +1,1435 @@
+/* =========================================================
+   1. PALETA Y VARIABLES
+   Cambia un color aquí y cambia en toda la web.
+   ========================================================= */
+:root {
+  --color-fondo: #1b1a17;
+  --color-barra: #1e1d1a;
+  --color-borde: #0e0d0b;
+  --color-cabecera-panel: #3b382f;
+  --color-panel: #e6e1d3;
+  --color-panel-linea: #c9c2ae;
+  --color-texto-claro: #f0ead6;
+  --color-texto-suave: #c9c1a8;
+  --color-texto-oscuro: #2a2823;
+  --color-texto-gris: #4a463c;
+  --color-dorado: #e8c043;
+  --color-verde-claro: #6bbd3c;
+  --color-verde-oscuro: #3f8a22;
+  --color-verde-borde: #24521a;
+  --color-naranja: #a84a18;
+  --color-metal: #55585a;
+  --color-metal-oscuro: #2f3132;
+
+  --fuente-titulos: "Oswald", sans-serif;
+  --fuente-texto: "Montserrat", system-ui, sans-serif;
+
+  --sombra-panel: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* =========================================================
+   2. BASE
+   ========================================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--fuente-texto);
+  color: var(--color-texto-oscuro);
+  background: radial-gradient(ellipse at 50% 0%, #3d3627 0%, #23211c 45%, #161512 100%) fixed;
+  background-color: var(--color-fondo);
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =========================================================
+   3. BARRA SUPERIOR
+   ========================================================= */
+.topbar {
+  background: var(--color-barra);
+  border-bottom: 2px solid var(--color-borde);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.topbar__interior {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marca__icono {
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: var(--color-dorado);
+  stroke-width: 1.6;
+}
+
+.marca__texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.marca__nombre {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--color-texto-claro);
+}
+
+.marca__sub {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  margin-top: 4px;
+  color: var(--color-texto-suave);
+}
+
+.doctrina-activa {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--color-texto-suave);
+}
+
+.doctrina-activa__chip {
+  font-family: var(--fuente-titulos);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  color: var(--color-barra);
+  background: var(--color-dorado);
+  padding: 4px 12px;
+  border-radius: 3px;
+}
+
+/* =========================================================
+   4. PESTAÑAS
+   ========================================================= */
+.pestanas__interior {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pestana {
+  flex: 1 1 140px;
+  text-align: center;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.08em;
+  color: var(--color-texto-suave);
+  text-decoration: none;
+  padding: 18px 8px 14px;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s;
+}
+
+.pestana:hover {
+  color: var(--color-texto-claro);
+}
+
+.pestana--activa {
+  color: var(--color-texto-claro);
+  border-bottom-color: var(--color-dorado);
+}
+
+/* =========================================================
+   5. LAYOUT PRINCIPAL (filas que se apilan en móvil)
+   ========================================================= */
+.principal {
+  flex: 1;
+  padding-top: 24px;
+  padding-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.fila--arriba {
+  align-items: flex-start;
+}
+
+.fila__ancho {
+  flex: 999 1 560px;
+  min-width: 0;
+}
+
+.fila__estrecho {
+  flex: 1 1 300px;
+}
+
+.fila__mitad {
+  flex: 1 1 460px;
+  min-width: 0;
+}
+
+/* =========================================================
+   6. COMPONENTE: PANEL
+   ========================================================= */
+.panel {
+  background: var(--color-panel);
+  border: 1px solid var(--color-borde);
+  box-shadow: var(--sombra-panel);
+}
+
+.panel__titulo {
+  margin: 0;
+  background: var(--color-cabecera-panel);
+  color: var(--color-texto-claro);
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  text-align: center;
+  padding: 10px;
+}
+
+.panel__cuerpo {
+  padding: 20px;
+}
+
+/* =========================================================
+   7. COMPONENTE: BOTÓN VERDE
+   ========================================================= */
+.boton-verde {
+  background: linear-gradient(var(--color-verde-claro), var(--color-verde-oscuro));
+  border: 2px solid var(--color-verde-borde);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 4px 0 #1d3f13;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+  padding: 10px 16px;
+  min-height: 44px;
+  transition: filter 0.15s, transform 0.05s;
+}
+
+.boton-verde:hover {
+  filter: brightness(1.08);
+}
+
+/* Al pulsar, el botón "se hunde" */
+.boton-verde:active {
+  transform: translateY(3px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 1px 0 #1d3f13;
+}
+
+.boton-verde--grande {
+  font-size: 30px;
+  padding: 16px 12px;
+}
+
+/* =========================================================
+   8. CAJA METÁLICA (la de "¿Todo listo?")
+   ========================================================= */
+.caja-metal {
+  background: var(--color-metal);
+  border: 6px solid var(--color-metal-oscuro);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+.caja-metal__pantalla {
+  background: #3f4244;
+  border-radius: 10px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  padding: 16px;
+  text-align: center;
+}
+
+.caja-metal__titulo {
+  margin: 0;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.25;
+  color: var(--color-texto-claro);
+}
+
+.caja-metal__resumen {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #d2ccba;
+}
+
+/* =========================================================
+   9. TARJETAS DE DOCTRINA
+   ========================================================= */
+.rejilla-doctrinas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+}
+
+.tarjeta-doctrina {
+  background: #ddd7c6;
+  border: 2px solid #8a8473;
+  border-radius: 4px;
+  padding: 16px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.tarjeta-doctrina:hover {
+  background: #ebe5d2;
+}
+
+.tarjeta-doctrina__medalla {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #5a5547, #2b2924);
+  border: 4px solid #8a8473;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 32px;
+  color: #8a8473;
+}
+
+.tarjeta-doctrina__nombre {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  color: var(--color-texto-oscuro);
+}
+
+/* Estado seleccionado: todo en dorado */
+.tarjeta-doctrina--activa {
+  background: #f6efd6;
+  border-color: var(--color-dorado);
+  box-shadow: 0 0 0 3px rgba(232, 192, 67, 0.4);
+}
+
+.tarjeta-doctrina--activa .tarjeta-doctrina__medalla {
+  border-color: var(--color-dorado);
+  color: var(--color-dorado);
+}
+
+/* =========================================================
+   10. TARJETAS DE TERRENO
+   ========================================================= */
+.rejilla-terrenos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.tarjeta-terreno {
+  height: 128px;
+  padding: 12px;
+  border: 2px solid var(--color-borde);
+  border-radius: 4px;
+  outline: 3px solid transparent;
+  outline-offset: 2px;
+  box-shadow: inset 0 -40px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: left;
+  transition: outline-color 0.15s, filter 0.15s;
+}
+
+/* Los terrenos no seleccionados se ven apagados y en gris */
+.tarjeta-terreno {
+  filter: grayscale(0.85) brightness(0.75);
+}
+
+.tarjeta-terreno:hover:not(.tarjeta-terreno--activa) {
+  filter: grayscale(0.4) brightness(0.9);
+}
+
+/* El seleccionado recupera su color y lleva el borde dorado */
+.tarjeta-terreno--activa {
+  filter: none;
+  outline-color: var(--color-dorado);
+}
+
+.tarjeta-terreno__icono {
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: var(--color-texto-claro);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tarjeta-terreno__nombre {
+  display: block;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+
+.tarjeta-terreno__nota {
+  display: block;
+  font-size: 12px;
+  color: var(--color-texto-claro);
+}
+
+/* =========================================================
+   11. FILAS DEL STACK
+   ========================================================= */
+.fila-unidad {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-panel-linea);
+}
+
+.fila-unidad__icono {
+  width: 64px;
+  height: 56px;
+  flex: none;
+  background: #2f3a2a;
+  border: 2px solid var(--color-borde);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fila-unidad__icono svg {
+  width: 38px;
+  height: 38px;
+  fill: none;
+  stroke: var(--color-dorado);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fila-unidad__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.fila-unidad__nombre {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.04em;
+  color: var(--color-naranja);
+}
+
+.fila-unidad__tipo {
+  font-size: 12px;
+  color: var(--color-texto-gris);
+}
+
+.contador {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contador__boton {
+  width: 44px;
+  height: 44px;
+  border-radius: 3px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.contador__boton--menos {
+  background: var(--color-cabecera-panel);
+  color: var(--color-texto-claro);
+  border: 1px solid var(--color-borde);
+}
+
+.contador__boton--mas {
+  padding: 0;
+}
+
+.contador__numero {
+  width: 44px;
+  text-align: center;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.stack-vacio {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--color-texto-gris);
+  border-bottom: 1px solid var(--color-panel-linea);
+}
+
+/* Bloque para añadir unidades */
+.anadir {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.anadir__etiqueta {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-cabecera-panel);
+}
+
+.anadir__controles {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.anadir__select {
+  flex: 1 1 200px;
+  min-height: 44px;
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: 15px;
+  background: #f6f2e6;
+  border: 2px solid #8a8473;
+  border-radius: 3px;
+}
+
+/* =========================================================
+   12. RESULTADOS
+   ========================================================= */
+.resultados {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.resultados__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.resultados__resumen {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.etiqueta-aviso {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-naranja);
+  border: 1px solid var(--color-naranja);
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+#lista-resultados {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stat__cabecera {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.stat__valor {
+  font-family: var(--fuente-titulos);
+  font-size: 16px;
+}
+
+.barra {
+  height: 12px;
+  background: var(--color-barra);
+  border: 1px solid var(--color-borde);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.barra__relleno {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(#7cc94a, var(--color-verde-oscuro));
+  transition: width 0.5s ease-out;
+  /* la barra "crece" al cambiar */
+}
+
+.nota {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--color-texto-gris);
+}
+
+/* Pequeño destello al pulsar SIMULAR */
+.destello {
+  animation: destello 0.6s ease-out;
+}
+
+@keyframes destello {
+  0% {
+    box-shadow: 0 0 0 4px var(--color-dorado), var(--sombra-panel);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 transparent, var(--sombra-panel);
+  }
+}
+
+/* =========================================================
+   13. PIE
+   ========================================================= */
+.pie {
+  padding: 18px 24px;
+  background: var(--color-barra);
+  border-top: 2px solid var(--color-borde);
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-texto-suave);
+}
+
+/* =========================================================
+   14. NIVEL DE LA UNIDAD (flechas ▲ ▼)
+   ========================================================= */
+.fila-unidad__titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nivel {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.nivel__boton {
+  width: 30px;
+  height: 30px;
+  background: var(--color-cabecera-panel);
+  color: var(--color-dorado);
+  border: 1px solid var(--color-borde);
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.nivel__boton:hover:not(:disabled) {
+  filter: brightness(1.3);
+}
+
+.nivel__boton:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* =========================================================
+   15. RESULTADOS: tarjetas de datos, tabla y avisos
+   ========================================================= */
+#lista-resultados {
+  gap: 16px;
+}
+
+.datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.dato {
+  background: #d9d3c1;
+  border: 1px solid #b5ad96;
+  border-radius: 3px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dato__etiqueta {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-texto-gris);
+}
+
+.dato__valor {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.clase-stack {
+  margin: 0;
+  font-size: 13px;
+}
+
+.tabla-tipos {
+  display: grid;
+  grid-template-columns: minmax(100px, 1.1fr) 1fr 1fr 1fr;
+  gap: 8px 14px;
+  align-items: center;
+}
+
+.tabla-tipos__cabecera {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--color-cabecera-panel);
+  border-bottom: 2px solid var(--color-panel-linea);
+  padding-bottom: 4px;
+}
+
+.tabla-tipos__tipo {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.celda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.celda__valor {
+  font-family: var(--fuente-titulos);
+  font-size: 15px;
+  width: 34px;
+  text-align: right;
+  flex: none;
+}
+
+.celda .barra {
+  flex: 1;
+  display: block;
+}
+
+.barra__relleno--ataque,
+.barra__relleno--distancia,
+.barra__relleno--defensa {
+  display: block;
+}
+
+.barra__relleno--distancia {
+  background: linear-gradient(#e8c043, #a07d14);
+}
+
+.barra__relleno--ataque {
+  background: linear-gradient(#e0743a, #9a3c12);
+}
+
+.barra__relleno--defensa {
+  background: linear-gradient(#7cc94a, var(--color-verde-oscuro));
+}
+
+.subtitulo {
+  margin: 4px 0 0;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cabecera-panel);
+}
+
+.aviso {
+  margin: 0;
+  padding: 10px 12px;
+  background: #f3dfc8;
+  border: 1px solid var(--color-naranja);
+  border-radius: 3px;
+  font-size: 13px;
+  color: #6e2e0c;
+}
+
+/* =========================================================
+   16. AÑADIR UNIDAD: pestañas de sección y catálogo
+   ========================================================= */
+.anadir__etiqueta {
+  margin: 0;
+}
+
+.secciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 4px;
+  border-bottom: 3px solid var(--color-cabecera-panel);
+}
+
+.seccion {
+  min-height: 40px;
+  padding: 6px 4px;
+  background: #b5ad96;
+  color: var(--color-texto-oscuro);
+  border: 1px solid #8a8473;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.seccion:hover:not(.seccion--activa) {
+  background: #c8c0a8;
+}
+
+.seccion--activa {
+  background: var(--color-cabecera-panel);
+  color: var(--color-texto-claro);
+  border-color: var(--color-cabecera-panel);
+}
+
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.unidad-catalogo {
+  min-height: 92px;
+  padding: 10px 8px;
+  background: #f6f2e6;
+  border: 2px solid #8a8473;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.unidad-catalogo:hover:not(:disabled) {
+  border-color: var(--color-verde-oscuro);
+  background: #fffbef;
+}
+
+.unidad-catalogo__icono {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: var(--color-cabecera-panel);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.unidad-catalogo__nombre {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-texto-oscuro);
+}
+
+.unidad-catalogo__estado {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-verde-oscuro);
+}
+
+.unidad-catalogo:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.unidad-catalogo:disabled .unidad-catalogo__estado {
+  color: var(--color-texto-gris);
+}
+
+/* =========================================================
+   17. BOTÓN PARA QUITAR UNA FILA ENTERA DEL STACK
+   ========================================================= */
+.quitar-fila {
+  width: 36px;
+  height: 44px;
+  flex: none;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quitar-fila svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #8a8473;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke 0.15s;
+}
+
+.quitar-fila:hover {
+  background: #f3dfc8;
+}
+
+.quitar-fila:hover svg {
+  stroke: var(--color-naranja);
+}
+
+/* =========================================================
+   18. NIVEL DEBAJO DEL NOMBRE DE LA UNIDAD
+   ========================================================= */
+.fila-unidad__nivel {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--color-texto-oscuro);
+  white-space: nowrap;
+  /* "Nivel" y el número nunca se separan */
+}
+
+/* =========================================================
+   19. OPCIONES DEL TERRENO MAR (barco de transporte)
+   ========================================================= */
+#opciones-mar:empty {
+  display: none;
+}
+
+.opciones-mar {
+  margin: 0 20px 20px;
+  padding: 12px 16px;
+  background: #d6e1e6;
+  border: 1px solid #1f4a63;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+}
+
+.opciones-mar__fila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.opciones-mar__etiqueta {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1f4a63;
+}
+
+.opciones-mar__casilla {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.opciones-mar__casilla input {
+  width: 20px;
+  height: 20px;
+  accent-color: #1f4a63;
+}
+
+.opciones-mar__aviso {
+  margin: 0 20px 20px;
+  font-size: 13px;
+  color: var(--color-texto-gris);
+}
+
+.aviso--mar {
+  background: #d6e1e6;
+  border-color: #1f4a63;
+  color: #143347;
+}
+
+/* =========================================================
+   20. IMPACTO DE UN SOLO USO (bombas aéreas, cohetes)
+   ========================================================= */
+.tabla-impacto {
+  display: grid;
+  grid-template-columns: minmax(100px, 1.1fr) 3fr;
+  gap: 8px 14px;
+  align-items: center;
+}
+
+.barra__relleno--impacto {
+  display: block;
+  background: linear-gradient(#d94a3a, #8a1f14);
+}
+
+/* =========================================================
+   21. VISTAS (pestañas)
+   "hidden" oculta la vista; el !important hace falta porque
+   .principal tiene display: flex y le ganaría.
+   ========================================================= */
+main[hidden] {
+  display: none !important;
+}
+
+/* =========================================================
+   22. BOTÓN "VACIAR STACK"
+   ========================================================= */
+.vaciar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 16px 0;
+}
+
+.vaciar__boton {
+  min-height: 36px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid #8a8473;
+  border-radius: 3px;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-texto-gris);
+}
+
+.vaciar__boton:hover {
+  border-color: var(--color-naranja);
+  color: var(--color-naranja);
+  background: #f3dfc8;
+}
+
+.vaciar__boton[hidden] {
+  display: none;
+}
+
+/* =========================================================
+   23. PESTAÑA COMPARAR
+   ========================================================= */
+.cmp-condiciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 24px;
+}
+
+.cmp-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 200px;
+}
+
+.cmp-condiciones__nota {
+  flex: 1 1 100%;
+  margin: 0;
+}
+
+.cmp-select {
+  min-height: 44px;
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: 15px;
+  background: #f6f2e6;
+  border: 2px solid #8a8473;
+  border-radius: 3px;
+  color: var(--color-texto-oscuro);
+}
+
+.cmp-controles {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cmp-anadir {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cmp-anadir .cmp-select {
+  flex: 1 1 200px;
+}
+
+.cmp-botones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Marcador "A gana en X vs B gana en Y" */
+.cmp-marcador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 16px;
+  font-family: var(--fuente-titulos);
+  font-size: 20px;
+  letter-spacing: 0.04em;
+}
+
+.cmp-marcador__vs {
+  color: var(--color-texto-gris);
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* Tabla: Estadística | A | B | Diferencia */
+.cmp-tabla {
+  display: grid;
+  grid-template-columns: minmax(130px, 1.4fr) 1fr 1fr 1fr;
+  gap: 6px 14px;
+  align-items: center;
+}
+
+.cmp-tabla__cabecera {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-cabecera-panel);
+  border-bottom: 2px solid var(--color-panel-linea);
+  padding-bottom: 4px;
+}
+
+.cmp-tabla__cabecera small {
+  font-family: var(--fuente-texto);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-texto-gris);
+}
+
+.cmp-tabla__grupo {
+  grid-column: 1 / -1;
+  /* ocupa toda la fila */
+  margin-top: 10px;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-naranja);
+}
+
+.cmp-tabla__etiqueta {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cmp-valor {
+  font-family: var(--fuente-titulos);
+  font-size: 16px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  justify-self: start;
+}
+
+.cmp-gana {
+  background: #d4ebc4;
+  color: #24521a;
+}
+
+.cmp-pierde {
+  background: #f3d2cc;
+  color: #8a1f14;
+}
+
+.cmp-dif {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-texto-gris);
+}
+
+/* En pantallas estrechas, la tabla se desliza de lado en vez de aplastarse */
+#cmp-tabla {
+  overflow-x: auto;
+}
+
+.cmp-tabla {
+  min-width: 480px;
+}
+
+/* Tarjetas de doctrina encima de cada stack (Comparar): versión compacta */
+.cmp-doctrina {
+  padding: 12px 16px;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  border-bottom: 1px solid var(--color-panel-linea);
+}
+
+.cmp-doctrina .tarjeta-doctrina {
+  padding: 10px 4px 8px;
+  gap: 6px;
+}
+
+.cmp-doctrina .tarjeta-doctrina__medalla {
+  width: 46px;
+  height: 46px;
+  font-size: 22px;
+  border-width: 3px;
+}
+
+.cmp-doctrina .tarjeta-doctrina__nombre {
+  font-size: 14px;
+}
+
+.cmp-nota-terreno {
+  margin: 0;
+  padding: 0 20px 16px;
+}
+
+/* =========================================================
+   24. PESTAÑA UNIDADES (ficha de consulta)
+   ========================================================= */
+.uni-selector {
+  flex: 1 1 340px;
+  min-width: 0;
+}
+
+.uni-panel-ficha {
+  flex: 999 1 560px;
+  min-width: 0;
+}
+
+/* La lista de unidades a una sola columna estrecha */
+.uni-selector .catalogo {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.unidad-catalogo--activa {
+  border-color: var(--color-dorado);
+  background: #fff6d9;
+  box-shadow: 0 0 0 3px rgba(232, 192, 67, 0.4);
+}
+
+.ficha {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ficha__cabecera {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.ficha__icono {
+  width: 72px;
+  height: 64px;
+}
+
+.ficha__icono svg {
+  width: 44px;
+  height: 44px;
+}
+
+.ficha__titulo {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ficha__nombre {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: var(--color-naranja);
+}
+
+.ficha__accion {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.ficha__accion .nota {
+  margin: 0;
+}
+
+.ficha__etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ficha__etiqueta {
+  padding: 3px 10px;
+  background: #4f7a2c;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ficha__tabla {
+  display: grid;
+  grid-template-columns: minmax(110px, 1.2fr) 1fr 1fr;
+  gap: 8px 14px;
+  align-items: center;
+}
+
+/* Tablas de terreno y evolución */
+.tabla-ficha {
+  display: grid;
+  gap: 6px 14px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.tabla-ficha--terreno {
+  grid-template-columns: minmax(90px, 1.2fr) repeat(4, 1fr);
+}
+
+.tabla-ficha--evolucion {
+  grid-template-columns: 0.6fr repeat(5, 1fr);
+}
+
+.tabla-ficha small {
+  color: var(--color-texto-gris);
+}
+
+.tabla-ficha__fila-entera {
+  grid-column: span 4;
+  color: var(--color-texto-gris);
+  font-style: italic;
+}
+
+.tabla-ficha__mas {
+  color: #24521a;
+  font-weight: 700;
+}
+
+.tabla-ficha__menos {
+  color: #8a1f14;
+  font-weight: 700;
+}
+
+.tabla-ficha__actual {
+  background: #fff6d9;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+/* Si no cabe, la tabla de evolución se desliza de lado */
+#uni-ficha {
+  overflow-x: auto;
+}
+
+.tabla-ficha--evolucion {
+  min-width: 460px;
+}
+
+/* =========================================================
+   25. PESTAÑA GUÍA
+   ========================================================= */
+.guia {
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 860px;
+}
+
+.guia p {
+  margin: 0 0 10px;
+}
+
+.guia ol,
+.guia ul {
+  margin: 0 0 10px;
+  padding-left: 22px;
+}
+
+.guia li {
+  margin-bottom: 6px;
+}
+
+.guia .subtitulo {
+  margin: 16px 0 4px;
+}
+
+.guia .subtitulo:first-child {
+  margin-top: 0;
+}
+
+.guia__tabla {
+  grid-template-columns: minmax(120px, 1.4fr) repeat(3, 1fr);
+  max-width: 560px;
+  margin-top: 6px;
+}

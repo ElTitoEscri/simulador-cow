@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estado Mayor · Simulador de stacks</title>
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='4' fill='%231e1d1a'/%3E%3Cpath d='M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8-4.3-4.1 5.9-.9z' fill='%23e8c043'/%3E%3C/svg%3E">
+
+    <!-- Fuentes de Google: Oswald (títulos) y Montserrat (texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- ===== BARRA SUPERIOR ===== -->
+    <header class="topbar">
+        <div class="contenedor topbar__interior">
+            <div class="marca">
+                <svg class="marca__icono" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 16.6 6.5 19.5l1-6.3L3 8.9 9 8z" />
+                </svg>
+                <div class="marca__texto">
+                    <span class="marca__nombre">ESTADO MAYOR</span>
+                    <span class="marca__sub">SIMULADOR DE STACKS</span>
+                </div>
+            </div>
+            <div class="doctrina-activa">
+                <span>Doctrina activa:</span>
+                <span class="doctrina-activa__chip" id="chip-doctrina">EJE</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== PESTAÑAS ===== -->
+    <nav class="pestanas" aria-label="Secciones">
+        <div class="contenedor pestanas__interior">
+            <a href="#simulador" class="pestana" data-vista="simulador">SIMULADOR</a>
+            <a href="#unidades" class="pestana" data-vista="unidades">UNIDADES</a>
+            <a href="#comparar" class="pestana" data-vista="comparar">COMPARAR</a>
+            <a href="#guia" class="pestana" data-vista="guia">GUÍA</a>
+        </div>
+    </nav>
+
+    <!-- ===== VISTA: SIMULADOR ===== -->
+    <main class="contenedor principal" id="vista-simulador" data-vista="simulador">
+
+        <!-- Fila 1: Doctrina -->
+        <div class="fila">
+            <section class="panel fila__ancho">
+                <h2 class="panel__titulo">DOCTRINA</h2>
+                <div class="panel__cuerpo rejilla-doctrinas" id="lista-doctrinas">
+                    <!-- Las tarjetas se generan desde app.js -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Fila 2: Terreno -->
+        <section class="panel">
+            <h2 class="panel__titulo">TERRENO</h2>
+            <div class="panel__cuerpo rejilla-terrenos" id="lista-terrenos">
+                <!-- Las tarjetas se generan desde app.js -->
+            </div>
+            <div id="opciones-mar">
+                <!-- Solo se rellena con el terreno Mar (desde app.js) -->
+            </div>
+        </section>
+
+        <!-- Fila 3: Stack + Resultados -->
+        <div class="fila fila--arriba">
+            <section class="panel fila__mitad">
+                <h2 class="panel__titulo">TU STACK</h2>
+                <div id="lista-stack">
+                    <!-- Las filas de unidades se generan desde app.js -->
+                </div>
+                <div class="vaciar">
+                    <button type="button" class="vaciar__boton" id="boton-vaciar" hidden>Vaciar stack</button>
+                </div>
+                <div class="anadir">
+                    <h3 class="anadir__etiqueta">Añadir unidad</h3>
+                    <div class="secciones" id="pestanas-secciones" role="tablist">
+                        <!-- Las pestañas se generan desde app.js -->
+                    </div>
+                    <div class="catalogo" id="lista-catalogo">
+                        <!-- Las unidades de la sección se generan desde app.js -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel fila__mitad" id="panel-resultados">
+                <h2 class="panel__titulo">RESULTADOS</h2>
+                <div class="panel__cuerpo resultados">
+                    <div class="resultados__cabecera">
+                        <span class="resultados__resumen" id="resumen-resultados"></span>
+                    </div>
+                    <div id="lista-resultados">
+                        <!-- Las barras se generan desde app.js -->
+                    </div>
+                    <p class="nota">La velocidad del stack es la de su unidad más lenta.</p>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+
+    <!-- ===== VISTA: UNIDADES ===== -->
+    <main class="contenedor principal" id="vista-unidades" data-vista="unidades" hidden>
+
+        <!-- Doctrina y lista de unidades -->
+        <section class="panel">
+            <h2 class="panel__titulo">DOCTRINA</h2>
+            <div class="panel__cuerpo rejilla-doctrinas" id="uni-doctrinas">
+                <!-- Las tarjetas se generan desde unidades.js -->
+            </div>
+        </section>
+
+        <div class="fila fila--arriba">
+            <section class="panel uni-selector">
+                <h2 class="panel__titulo">UNIDADES</h2>
+                <div class="anadir">
+                    <div class="secciones" id="uni-secciones" role="tablist">
+                        <!-- Las pestañas se generan desde unidades.js -->
+                    </div>
+                    <div class="catalogo" id="uni-lista">
+                        <!-- Las unidades se generan desde unidades.js -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel uni-panel-ficha">
+                <h2 class="panel__titulo">FICHA</h2>
+                <div class="panel__cuerpo ficha" id="uni-ficha">
+                    <!-- Se genera desde unidades.js -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ===== VISTA: COMPARAR ===== -->
+    <main class="contenedor principal" id="vista-comparar" data-vista="comparar" hidden>
+
+        <!-- Terreno de la comparación (independiente del Simulador) -->
+        <section class="panel">
+            <h2 class="panel__titulo">TERRENO</h2>
+            <div class="panel__cuerpo rejilla-terrenos" id="cmp-terreno">
+                <!-- Las tarjetas se generan desde comparar.js -->
+            </div>
+            <p class="nota cmp-nota-terreno">Los dos stacks combaten en este terreno. Es independiente del Simulador; en
+                el Mar se usa el nivel de transporte elegido allí.</p>
+        </section>
+
+        <!-- Los dos stacks, cada uno con su doctrina -->
+        <div class="fila fila--arriba">
+            <section class="panel fila__mitad">
+                <h2 class="panel__titulo">STACK A</h2>
+                <div class="cmp-doctrina rejilla-doctrinas" id="cmp-doctrina-a">
+                    <!-- Las tarjetas se generan desde comparar.js -->
+                </div>
+                <div id="cmp-lista-a">
+                    <!-- Las filas se generan desde comparar.js -->
+                </div>
+                <div class="cmp-controles">
+                    <label class="anadir__etiqueta" for="cmp-select-a">Añadir unidad</label>
+                    <div class="cmp-anadir">
+                        <select id="cmp-select-a" class="cmp-select" data-cmp-select="a"></select>
+                        <button type="button" class="boton-verde" data-cmp-anadir="a">+ AÑADIR</button>
+                    </div>
+                    <div class="cmp-botones">
+                        <button type="button" class="vaciar__boton" data-cmp-copiar="a">Copiar del simulador</button>
+                        <button type="button" class="vaciar__boton" data-cmp-vaciar="a">Vaciar</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel fila__mitad">
+                <h2 class="panel__titulo">STACK B</h2>
+                <div class="cmp-doctrina rejilla-doctrinas" id="cmp-doctrina-b">
+                    <!-- Las tarjetas se generan desde comparar.js -->
+                </div>
+                <div id="cmp-lista-b">
+                    <!-- Las filas se generan desde comparar.js -->
+                </div>
+                <div class="cmp-controles">
+                    <label class="anadir__etiqueta" for="cmp-select-b">Añadir unidad</label>
+                    <div class="cmp-anadir">
+                        <select id="cmp-select-b" class="cmp-select" data-cmp-select="b"></select>
+                        <button type="button" class="boton-verde" data-cmp-anadir="b">+ AÑADIR</button>
+                    </div>
+                    <div class="cmp-botones">
+                        <button type="button" class="vaciar__boton" data-cmp-copiar="b">Copiar del simulador</button>
+                        <button type="button" class="vaciar__boton" data-cmp-vaciar="b">Vaciar</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Tabla de comparación -->
+        <section class="panel">
+            <h2 class="panel__titulo">COMPARACIÓN</h2>
+            <div class="panel__cuerpo" id="cmp-tabla">
+                <!-- Se genera desde comparar.js -->
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== VISTA: GUÍA ===== -->
+    <main class="contenedor principal" id="vista-guia" data-vista="guia" hidden>
+
+        <section class="panel">
+            <h2 class="panel__titulo">CÓMO USAR EL SIMULADOR</h2>
+            <div class="panel__cuerpo guia">
+                <ol>
+                    <li><strong>Elige tu doctrina</strong> en las medallas de arriba. Los datos ya llevan aplicados sus
+                        bonus.</li>
+                    <li><strong>Elige el terreno</strong> donde va a combatir el stack.</li>
+                    <li><strong>Añade unidades</strong> desde el catálogo de abajo (pestañas por sección). Ajusta la
+                        cantidad con <strong>+ / −</strong>, el nivel con <strong>▼ ▲</strong> y quita una fila entera
+                        con la <strong>✕</strong>.</li>
+                    <li>Los <strong>resultados</strong> se recalculan solos con cada cambio.</li>
+                </ol>
+                <p>Además:</p>
+                <ul>
+                    <li><strong>Unidades:</strong> consulta la ficha completa de cualquier unidad y nivel, y añádela al
+                        simulador.</li>
+                    <li><strong>Comparar:</strong> pon dos stacks frente a frente, cada uno con su doctrina, en el mismo
+                        terreno. Verde gana, rojo pierde.</li>
+                    <li>La web <strong>recuerda</strong> lo que tenías al cerrar (se guarda en tu navegador).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2 class="panel__titulo">REGLAS QUE APLICA</h2>
+            <div class="panel__cuerpo guia">
+                <h3 class="subtitulo">Solo las 10 más fuertes hacen daño</h3>
+                <p>Como en el juego, un stack puede tener más de 10 unidades, pero solo las 10 más poderosas infligen
+                    daño. Se eligen por separado para cada tipo de objetivo: las 10 mejores contra tanques no tienen por
+                    qué ser las 10 mejores contra infantería. La vida, la defensa del resto y los costes sí cuentan
+                    todas.</p>
+
+                <h3 class="subtitulo">Cuerpo a cuerpo y a distancia</h3>
+                <p>Las unidades con alcance 0 (infantería, tanques, destructores…) combaten cuerpo a cuerpo. Las que
+                    tienen alcance (artillería, cruceros, aviones…) atacan a distancia sin recibir daño. Por eso salen
+                    en columnas separadas. La defensa la suman todas, porque si te atacan defiende el stack entero.</p>
+
+                <h3 class="subtitulo">Terreno</h3>
+                <p>Cada unidad tiene su propio bonus o penalización de fuerza en cada terreno (+70 % la infantería en
+                    bosque, +45 % la mecanizada en llanuras…). Ese porcentaje multiplica su ataque y su defensa. La
+                    velocidad del stack es la de su unidad más lenta, con el efecto del terreno aplicado.</p>
+
+                <h3 class="subtitulo">Clase de la unidad</h3>
+                <p>Cada unidad es de una clase (No blindado, Blindaje ligero, Blindaje pesado, Avión, Barco, Submarino).
+                    El enemigo le hace el daño de su columna «contra» esa clase. Un tanque pesado aguanta a la
+                    infantería porque la infantería hace poco daño «contra Blindaje pesado».</p>
+
+                <h3 class="subtitulo">El mar</h3>
+                <p>Las unidades de tierra en el mar viajan como <strong>Barco de transporte</strong> del nivel que
+                    elijas, y combaten con sus datos. Los aviones siguen siendo aviones, salvo que marques que se
+                    trasladan por mar. Los barcos solo combaten en el mar: en tierra no cuentan.</p>
+
+                <h3 class="subtitulo">Armas de un solo uso</h3>
+                <p>Las bombas aéreas, los cohetes y las armas nucleares golpean una vez y desaparecen. Su daño se
+                    muestra aparte, sumando todas (cada una impacta por su cuenta), y no entran en la regla de las 10.
+                    Las bombas aéreas y el bombardero nuclear pueden ser derribados por antiaéreas; los cohetes son
+                    supersónicos y no.</p>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2 class="panel__titulo">QUÉ NO SIMULA</h2>
+            <div class="panel__cuerpo guia">
+                <p>El simulador calcula las estadísticas de un stack a vida completa. No tiene en cuenta:</p>
+                <ul>
+                    <li>Unidades dañadas: en el juego, una unidad con poca vida hace menos daño.</li>
+                    <li>La moral, el suministro y la <strong>eficiencia de daño</strong> de la partida.</li>
+                    <li>El <strong>sigilo</strong>, la exploración y la visión necesaria para atacar a distancia.</li>
+                    <li>Habilidades como el <strong>Asalto</strong> (ignorar la defensa enemiga), la lluvia radiactiva o
+                        el fuego amigo real.</li>
+                    <li>Edificios, fortificaciones y bonus de provincia.</li>
+                    <li>El combate en sí: compara estadísticas, no decide quién gana una batalla.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2 class="panel__titulo">DATOS</h2>
+            <div class="panel__cuerpo guia">
+                <p>Los valores se han copiado de la ficha «Información de investigación» del juego, que ya muestra los
+                    números con la doctrina aplicada. El juego redondea los números grandes («1.2k»), así que algunos
+                    costes y velocidades pueden variar ligeramente.</p>
+                <div id="guia-datos">
+                    <!-- Se genera desde guia.js -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie">
+        Herramienta fan, no afiliada a Bytro Labs ni a Call of War.
+    </footer>
+
+    <!-- El orden importa: primero los datos, luego los cálculos y al final la app -->
+    <script src="js/datos.js"></script>
+    <script src="js/calculos.js"></script>
+    <script src="js/comparar.js"></script>
+    <script src="js/unidades.js"></script>
+    <script src="js/guia.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
